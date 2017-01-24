@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Launcher</string>
+    <string name="app_header_photo_name">Photo</string>
+    <string name="app_header_video_name">Live</string>
+    <string name="app_header_app_name">App</string>
+    <string name="app_header_function_name">Function</string>
+    <string name="app_header_inputsource_name">InputSource</string>
+    <string name="app_header_app_weather">Weather</string>
+</resources>
