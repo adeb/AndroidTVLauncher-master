@@ -114,12 +114,11 @@ public class MainActivity extends Activity {
         mBrowseFragment.setOnItemViewSelectedListener(new OnItemViewSelectedListener() {
             @Override
             public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+
+                int width = mMetrics.widthPixels;
+                int height = mMetrics.heightPixels;
                 if (item instanceof MediaModel) {
-
                     MediaModel mediaModel = (MediaModel) item;
-                    int width = mMetrics.widthPixels;
-                    int height = mMetrics.heightPixels;
-
                     Glide.with(mContext)
                             .load(mediaModel.getImageUrl())
                             .asBitmap()
@@ -131,7 +130,19 @@ public class MainActivity extends Activity {
                                 }
                             });
                 } else {
-                    mBackgroundManager.setBitmap(null);
+                    //加载本地的图片做为背景
+                    Glide.with(mContext)
+                            .load(R.drawable.default_bg2)
+                            .asBitmap()
+                            .centerCrop()
+                            .into(new SimpleTarget<Bitmap>(width, height) {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    mBackgroundManager.setBitmap(resource);
+                                }
+                            });
+
+                    //mBackgroundManager.setBitmap(null);
                 }
             }
         });
